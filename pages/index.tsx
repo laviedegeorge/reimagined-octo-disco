@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Web3 from "web3";
 import Head from "next/head";
 import classNames from "classnames";
-import { erc20ABI } from "./libs/contractABIs/erc20ABI";
+import { erc20ABI } from "../libs/contractABIs/erc20ABI";
 import { MetaMaskInpageProvider } from "@metamask/providers";
 import detectEthereumProvider from "@metamask/detect-provider";
 
