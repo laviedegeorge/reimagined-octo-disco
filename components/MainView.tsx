@@ -10,7 +10,7 @@ import TransferTo, {
   TransferNativeTo,
 } from "./contractComponents/contractForms/TransferForms";
 
-const tokenContract = {
+const tokenContract: any = {
   address: contractAddress,
   abi: erc20ABI,
 };
