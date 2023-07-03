@@ -21,7 +21,6 @@ export default function DecreaseIncreaseAllowanceForm({
     type === "decreaseAllowance"
       ? "Decreasing allowance..."
       : "Increasing allowance...";
-  //   const [args, setArgs] = useState<undefined | string[]>(undefined);
   const [formValues, setFormValues] = useState({
     amount: "",
     spender: "",
@@ -71,81 +70,64 @@ export default function DecreaseIncreaseAllowanceForm({
     []
   );
 
-  console.log(
-    `${
-      type === "decreaseAllowance" ? "decrease Allowance" : "increase allowance"
-    }`,
-    data,
-    prepareError?.message,
-    error?.message
-  );
-  //   console.count("rendered");
-
   return (
-    <div className="my-5 border p-4">
-      <form className="space-y-3">
-        <h3 className="mb-2 text-xl font-medium underline">
-          {type === "decreaseAllowance"
-            ? "Decrease allowance"
-            : "Increase allowance"}
-        </h3>
-        <label>
-          spender (address) <br />
-          <input
-            type="text"
-            className="block border px-4 py-2 w-full mt-1"
-            value={formValues.spender}
-            onChange={(e) => onChange(e, "spender")}
-            placeholder="0xE58...4B29"
-          />
-        </label>
-        <label>
-          {type === "decreaseAllowance" ? "Subtracted value" : "Added value"}{" "}
-          <br />
-          <input
-            type="text"
-            className="block border px-4 py-2 w-full mt-1"
-            value={formValues.amount}
-            onChange={(e) => onChange(e, "amount")}
-            placeholder="0.05"
-          />
-        </label>
-        <div>
-          <button
-            disabled={!write}
-            onClick={() => {
-              if (formValues.amount === "" || formValues.spender === "") return;
-              write();
-            }}
-            type="button"
-            className="primary_btn"
-          >
-            {writeLoading || waitForTxLoading ? loadingText : btnText}
-          </button>
-          {isSuccess && (
-            <AlertMsg type="success">
-              <p>
-                You have successfully{" "}
-                {type === "decreaseAllowance" ? "decreased " : "increased "}
-                allowance!
-              </p>
-              <a
-                className=" underline"
-                href={`https://testnet.bscscan.com/tx/${data?.hash}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                See transaction here (BscScan testnet)
-              </a>
-            </AlertMsg>
-          )}
-          {(isPrepareError || isError || isWaitForTxError) && count > 0 && (
-            <AlertMsg type="error">
-              <p>Error: {(prepareError || error || waitForTxError)?.message}</p>
-            </AlertMsg>
-          )}
-        </div>
-      </form>
-    </div>
+    <form className="space-y-3">
+      <label>
+        spender (address) <br />
+        <input
+          type="text"
+          className="block border px-4 py-2 w-full mt-1"
+          value={formValues.spender}
+          onChange={(e) => onChange(e, "spender")}
+          placeholder="0xE58...4B29"
+        />
+      </label>
+      <label>
+        {type === "decreaseAllowance" ? "Subtracted value" : "Added value"}{" "}
+        <br />
+        <input
+          type="text"
+          className="block border px-4 py-2 w-full mt-1"
+          value={formValues.amount}
+          onChange={(e) => onChange(e, "amount")}
+          placeholder="0.05"
+        />
+      </label>
+      <div>
+        <button
+          disabled={!write}
+          onClick={() => {
+            if (formValues.amount === "" || formValues.spender === "") return;
+            write();
+          }}
+          type="button"
+          className="primary_btn"
+        >
+          {writeLoading || waitForTxLoading ? loadingText : btnText}
+        </button>
+        {isSuccess && (
+          <AlertMsg type="success">
+            <p>
+              You have successfully{" "}
+              {type === "decreaseAllowance" ? "decreased " : "increased "}
+              allowance!
+            </p>
+            <a
+              className=" underline"
+              href={`https://testnet.bscscan.com/tx/${data?.hash}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              See transaction here (BscScan testnet)
+            </a>
+          </AlertMsg>
+        )}
+        {(isPrepareError || isError || isWaitForTxError) && count > 0 && (
+          <AlertMsg type="error">
+            <p>Error: {(prepareError || error || waitForTxError)?.message}</p>
+          </AlertMsg>
+        )}
+      </div>
+    </form>
   );
 }

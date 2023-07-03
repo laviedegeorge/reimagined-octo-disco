@@ -58,67 +58,63 @@ export default function TransferTo() {
   );
 
   return (
-    <div className="my-5 border p-4">
-      <form className="space-y-3">
-        <h3 className="mb-2 text-xl font-medium underline">Transfer To</h3>
-        <label>
-          To (address) <br />
-          <input
-            type="text"
-            className="block border px-4 py-2 w-full mt-1"
-            value={formValues.to}
-            onChange={(e) => onChange(e, "to")}
-            placeholder="0xE58...4B29"
-          />
-        </label>
-        <label>
-          Amount <br />
-          <input
-            type="text"
-            className="block border px-4 py-2 w-full mt-1"
-            value={formValues.amount}
-            onChange={(e) => onChange(e, "amount")}
-            placeholder="0.05"
-          />
-        </label>
-        <div>
-          <button
-            disabled={!write}
-            onClick={() => {
-              if (formValues.amount === "" || formValues.to === "") return;
-              write();
-            }}
-            type="button"
-            className="primary_btn"
-          >
-            {writeLoading || waitForTxLoading ? "Transferring..." : "Transfer"}
-          </button>
-          {isSuccess && (
-            <AlertMsg type="success">
-              <p>Transfer successful!</p>
-              <a
-                className=" underline"
-                href={`https://testnet.bscscan.com/tx/${data?.hash}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                See transaction here (BscScan testnet)
-              </a>
-            </AlertMsg>
-          )}
-          {(isPrepareError || isError) && transferToCount > 0 && (
-            <AlertMsg type="error">
-              <p>Error: {(prepareError || error)?.message}</p>
-            </AlertMsg>
-          )}
-        </div>
-      </form>
-    </div>
+    <form className="space-y-3">
+      <label>
+        To (address) <br />
+        <input
+          type="text"
+          className="block border px-4 py-2 w-full mt-1"
+          value={formValues.to}
+          onChange={(e) => onChange(e, "to")}
+          placeholder="0xE58...4B29"
+        />
+      </label>
+      <label>
+        Amount <br />
+        <input
+          type="text"
+          className="block border px-4 py-2 w-full mt-1"
+          value={formValues.amount}
+          onChange={(e) => onChange(e, "amount")}
+          placeholder="0.05"
+        />
+      </label>
+      <div>
+        <button
+          disabled={!write}
+          onClick={() => {
+            if (formValues.amount === "" || formValues.to === "") return;
+            write();
+          }}
+          type="button"
+          className="primary_btn"
+        >
+          {writeLoading || waitForTxLoading ? "Transferring..." : "Transfer"}
+        </button>
+        {isSuccess && (
+          <AlertMsg type="success">
+            <p>Transfer successful!</p>
+            <a
+              className=" underline"
+              href={`https://testnet.bscscan.com/tx/${data?.hash}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              See transaction here (BscScan testnet)
+            </a>
+          </AlertMsg>
+        )}
+        {(isPrepareError || isError) && transferToCount > 0 && (
+          <AlertMsg type="error">
+            <p>Error: {(prepareError || error)?.message}</p>
+          </AlertMsg>
+        )}
+      </div>
+    </form>
   );
 }
 
 export function TransferFromTo() {
-  //   const [args, setArgs] = useState<undefined | string[]>(undefined);
   const [formValues, setFormValues] = useState({
     from: "",
     to: "",
@@ -167,77 +163,74 @@ export function TransferFromTo() {
   );
 
   return (
-    <div className="my-5 border p-4">
-      <form className="space-y-3">
-        <h3 className="mb-2 text-xl font-medium underline">Transfer</h3>
-        <label>
-          From (address) <br />
-          <input
-            type="text"
-            className="block border px-4 py-2 w-full mt-1"
-            value={formValues.from}
-            onChange={(e) => onChange(e, "from")}
-            placeholder="0xE58...4B29"
-          />
-        </label>
-        <label>
-          To (address) <br />
-          <input
-            type="text"
-            className="block border px-4 py-2 w-full mt-1"
-            value={formValues.to}
-            onChange={(e) => onChange(e, "to")}
-            placeholder="0xE58...4B29"
-          />
-        </label>
-        <label>
-          Amount <br />
-          <input
-            type="text"
-            className="block border px-4 py-2 w-full mt-1"
-            value={formValues.amount}
-            onChange={(e) => onChange(e, "amount")}
-            placeholder="0.05"
-          />
-        </label>
-        <div>
-          <button
-            disabled={!write}
-            onClick={() => {
-              if (
-                formValues.amount === "" ||
-                formValues.from === "" ||
-                formValues.to === ""
-              )
-                return;
-              write();
-            }}
-            type="button"
-            className="primary_btn"
-          >
-            {writeLoading || waitForTxLoading ? "Transferring..." : "Transfer"}
-          </button>
-          {isSuccess && (
-            <AlertMsg type="success">
-              <p>Transfer successful!</p>
-              <a
-                className=" underline"
-                href={`https://testnet.bscscan.com/tx/${data?.hash}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                See transaction here (BscScan testnet)
-              </a>
-            </AlertMsg>
-          )}
-          {(isPrepareError || isError) && transferFromToCount > 0 && (
-            <AlertMsg type="error">
-              <p>Error: {(prepareError || error)?.message}</p>
-            </AlertMsg>
-          )}
-        </div>
-      </form>
-    </div>
+    <form className="space-y-3">
+      <label>
+        From (address) <br />
+        <input
+          type="text"
+          className="block border px-4 py-2 w-full mt-1"
+          value={formValues.from}
+          onChange={(e) => onChange(e, "from")}
+          placeholder="0xE58...4B29"
+        />
+      </label>
+      <label>
+        To (address) <br />
+        <input
+          type="text"
+          className="block border px-4 py-2 w-full mt-1"
+          value={formValues.to}
+          onChange={(e) => onChange(e, "to")}
+          placeholder="0xE58...4B29"
+        />
+      </label>
+      <label>
+        Amount <br />
+        <input
+          type="text"
+          className="block border px-4 py-2 w-full mt-1"
+          value={formValues.amount}
+          onChange={(e) => onChange(e, "amount")}
+          placeholder="0.05"
+        />
+      </label>
+      <div>
+        <button
+          disabled={!write}
+          onClick={() => {
+            if (
+              formValues.amount === "" ||
+              formValues.from === "" ||
+              formValues.to === ""
+            )
+              return;
+            write();
+          }}
+          type="button"
+          className="primary_btn"
+        >
+          {writeLoading || waitForTxLoading ? "Transferring..." : "Transfer"}
+        </button>
+        {isSuccess && (
+          <AlertMsg type="success">
+            <p>Transfer successful!</p>
+            <a
+              className=" underline"
+              href={`https://testnet.bscscan.com/tx/${data?.hash}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              See transaction here (BscScan testnet)
+            </a>
+          </AlertMsg>
+        )}
+        {(isPrepareError || isError) && transferFromToCount > 0 && (
+          <AlertMsg type="error">
+            <p>Error: {(prepareError || error)?.message}</p>
+          </AlertMsg>
+        )}
+      </div>
+    </form>
   );
 }
 
@@ -282,61 +275,58 @@ export function TransferNativeTo() {
   );
 
   return (
-    <div className="my-5 border p-4">
-      <form className="space-y-3">
-        <h3 className="mb-2 text-xl font-medium underline">Transfer TBNB To</h3>
-        <label>
-          To (address) <br />
-          <input
-            type="text"
-            className="block border px-4 py-2 w-full mt-1"
-            value={formValues.to}
-            onChange={(e) => onChange(e, "to")}
-            placeholder="0xE58...4B29"
-          />
-        </label>
-        <label>
-          Amount <br />
-          <input
-            type="text"
-            className="block border px-4 py-2 w-full mt-1"
-            value={formValues.amount}
-            onChange={(e) => onChange(e, "amount")}
-            placeholder="0.05"
-          />
-        </label>
-        <div>
-          <button
-            disabled={!sendTransaction}
-            onClick={() => {
-              if (formValues.amount === "" || formValues.to === "") return;
-              sendTransaction();
-            }}
-            type="button"
-            className="primary_btn"
-          >
-            {writeLoading || waitForTxLoading ? "Transferring..." : "Transfer"}
-          </button>
-          {isSuccess && (
-            <AlertMsg type="success">
-              <p>Transfer successful!</p>
-              <a
-                className=" underline"
-                href={`https://testnet.bscscan.com/tx/${data?.hash}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                See transaction here (BscScan testnet)
-              </a>
-            </AlertMsg>
-          )}
-          {(isPrepareError || isError) && transferToCount > 0 && (
-            <AlertMsg type="error">
-              <p>Error: {(prepareError || error)?.message}</p>
-            </AlertMsg>
-          )}
-        </div>
-      </form>
-    </div>
+    <form className="space-y-3">
+      <label>
+        To (address) <br />
+        <input
+          type="text"
+          className="block border px-4 py-2 w-full mt-1"
+          value={formValues.to}
+          onChange={(e) => onChange(e, "to")}
+          placeholder="0xE58...4B29"
+        />
+      </label>
+      <label>
+        Amount <br />
+        <input
+          type="text"
+          className="block border px-4 py-2 w-full mt-1"
+          value={formValues.amount}
+          onChange={(e) => onChange(e, "amount")}
+          placeholder="0.05"
+        />
+      </label>
+      <div>
+        <button
+          disabled={!sendTransaction}
+          onClick={() => {
+            if (formValues.amount === "" || formValues.to === "") return;
+            sendTransaction();
+          }}
+          type="button"
+          className="primary_btn"
+        >
+          {writeLoading || waitForTxLoading ? "Transferring..." : "Transfer"}
+        </button>
+        {isSuccess && (
+          <AlertMsg type="success">
+            <p>Transfer successful!</p>
+            <a
+              className=" underline"
+              href={`https://testnet.bscscan.com/tx/${data?.hash}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              See transaction here (BscScan testnet)
+            </a>
+          </AlertMsg>
+        )}
+        {(isPrepareError || isError) && transferToCount > 0 && (
+          <AlertMsg type="error">
+            <p>Error: {(prepareError || error)?.message}</p>
+          </AlertMsg>
+        )}
+      </div>
+    </form>
   );
 }

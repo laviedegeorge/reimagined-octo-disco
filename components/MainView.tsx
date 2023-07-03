@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useAccount, useContractReads } from "wagmi";
 import { contractAddress, erc20ABI } from "../libs/contractABIs/erc20ABI";
 import ReadAllowance from "./contractComponents/contractForms/ReadAllowance";
@@ -9,6 +9,7 @@ import TransferTo, {
   TransferFromTo,
   TransferNativeTo,
 } from "./contractComponents/contractForms/TransferForms";
+import FormContainer from "./FormContainer";
 
 const tokenContract: any = {
   address: contractAddress,
@@ -31,8 +32,19 @@ type ContractInfo = {
   totalSupply: unknown;
 };
 
+type IsOpenTypes =
+  | "read_allowance"
+  | "approve"
+  | "decrease_allowance"
+  | "increase_allowance"
+  | "transfer"
+  | "transfer_to"
+  | "transfer_TBNB_to"
+  | "";
+
 export default function MainView() {
   const { address } = useAccount();
+  const [open, setOpen] = useState<IsOpenTypes>();
   const [tokenContractInfo, setTokenContractInfo] = useState<ContractInfo>();
   const { tokenName, balance, decimals, tokenSymbol, totalSupply } =
     tokenContractInfo || {};
@@ -63,6 +75,16 @@ export default function MainView() {
       ],
     });
 
+  const changeOpen = useCallback((nextState: IsOpenTypes) => {
+    setOpen((prev) => {
+      if (prev === nextState) {
+        return "";
+      } else {
+        return nextState;
+      }
+    });
+  }, []);
+
   useEffect(() => {
     if (tokenContractData) {
       let tokenInfoObj = {} as ContractInfo;
@@ -73,8 +95,6 @@ export default function MainView() {
       setTokenContractInfo(tokenInfoObj);
     }
   }, [tokenContractData]);
-
-  //   console.log("contract info", tokenContractInfo);
 
   isLoadingTokenContractData && <p>Loading name of token...</p>;
 
@@ -99,16 +119,65 @@ export default function MainView() {
           }${tokenSymbol}`}
         </p>
         <p>decimals: {`${decimals && decimals}`}</p>
-        <ReadAllowance />
+        <div className="my-5">
+          <FormContainer
+            header="Read allowance"
+            isOpen={open === "read_allowance"}
+            setIsOpen={() => changeOpen("read_allowance")}
+          >
+            <ReadAllowance />
+          </FormContainer>
+        </div>
       </div>
-      <div>
+      <div className=" space-y-5">
         <h2 className="text-2xl font-semibold underline mb-2">Read methods</h2>
-        <ApproveTransactionForm />
-        <DecreaseIncreaseAllowanceForm type="decreaseAllowance" />
-        <DecreaseIncreaseAllowanceForm type="increaseAllowance" />
-        <TransferTo />
-        <TransferFromTo />
-        <TransferNativeTo />
+        <FormContainer
+          header="Approve transaction"
+          isOpen={open === "approve"}
+          setIsOpen={() => changeOpen("approve")}
+        >
+          <ApproveTransactionForm />
+        </FormContainer>
+
+        <FormContainer
+          header="Decrease allowance"
+          isOpen={open === "decrease_allowance"}
+          setIsOpen={() => changeOpen("decrease_allowance")}
+        >
+          <DecreaseIncreaseAllowanceForm type="decreaseAllowance" />
+        </FormContainer>
+
+        <FormContainer
+          header="Increase allowance"
+          isOpen={open === "increase_allowance"}
+          setIsOpen={() => changeOpen("increase_allowance")}
+        >
+          <DecreaseIncreaseAllowanceForm type="increaseAllowance" />
+        </FormContainer>
+
+        <FormContainer
+          header="Transfer to"
+          isOpen={open === "transfer"}
+          setIsOpen={() => changeOpen("transfer")}
+        >
+          <TransferTo />
+        </FormContainer>
+
+        <FormContainer
+          header="Transfer from"
+          isOpen={open === "transfer_to"}
+          setIsOpen={() => changeOpen("transfer_to")}
+        >
+          <TransferFromTo />
+        </FormContainer>
+
+        <FormContainer
+          header="Transfer TBNB"
+          isOpen={open === "transfer_TBNB_to"}
+          setIsOpen={() => changeOpen("transfer_TBNB_to")}
+        >
+          <TransferNativeTo />
+        </FormContainer>
       </div>
     </div>
   );
