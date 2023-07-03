@@ -3,3 +3,11 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.primary_btn {
+  @apply bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2;
+}
+
+.warning_btn {
+  @apply bg-red-500 hover:bg-blue-600 text-white rounded-md px-4 py-2;
+}
