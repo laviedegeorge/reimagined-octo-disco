@@ -5,6 +5,10 @@ import ReadAllowance from "./contractComponents/contractForms/ReadAllowance";
 import Web3 from "web3";
 import ApproveTransactionForm from "./contractComponents/contractForms/ApproveForm";
 import DecreaseIncreaseAllowanceForm from "./contractComponents/contractForms/DecreaseIncreaseAllowance";
+import TransferTo, {
+  TransferFromTo,
+  TransferNativeTo,
+} from "./contractComponents/contractForms/TransferForms";
 
 const tokenContract = {
   address: contractAddress,
@@ -102,6 +106,9 @@ export default function MainView() {
         <ApproveTransactionForm />
         <DecreaseIncreaseAllowanceForm type="decreaseAllowance" />
         <DecreaseIncreaseAllowanceForm type="increaseAllowance" />
+        <TransferTo />
+        <TransferFromTo />
+        <TransferNativeTo />
       </div>
     </div>
   );

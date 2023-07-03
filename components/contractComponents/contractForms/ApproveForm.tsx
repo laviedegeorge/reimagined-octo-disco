@@ -1,4 +1,4 @@
-import React, { EventHandler, useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { parseEther } from "viem";
 import { useDebounce } from "use-debounce";
 import { contractAddress, erc20ABI } from "../../../libs/contractABIs/erc20ABI";
