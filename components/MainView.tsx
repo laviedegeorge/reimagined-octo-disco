@@ -4,6 +4,7 @@ import { contractAddress, erc20ABI } from "../libs/contractABIs/erc20ABI";
 import ReadAllowance from "./contractComponents/contractForms/ReadAllowance";
 import Web3 from "web3";
 import ApproveTransactionForm from "./contractComponents/contractForms/ApproveForm";
+import DecreaseIncreaseAllowanceForm from "./contractComponents/contractForms/DecreaseIncreaseAllowance";
 
 const tokenContract = {
   address: contractAddress,
@@ -99,6 +100,8 @@ export default function MainView() {
       <div>
         <h2 className="text-2xl font-semibold underline mb-2">Read methods</h2>
         <ApproveTransactionForm />
+        <DecreaseIncreaseAllowanceForm type="decreaseAllowance" />
+        <DecreaseIncreaseAllowanceForm type="increaseAllowance" />
       </div>
     </div>
   );

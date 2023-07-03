@@ -3,8 +3,7 @@ export const contractAddress = "0xF14871faE7C05Fb7a5175158809066c2Bc581C80";
 export const erc20ABI = [
   {
     inputs: [
-      { internalType: "string", name: "name__", type: "string" },
-      { internalType: "string", name: "symbol__", type: "string" },
+      { internalType: "uint256", name: "initialSupply", type: "uint256" },
     ],
     stateMutability: "nonpayable",
     type: "constructor",
