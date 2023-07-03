@@ -1,3 +1,5 @@
+export const contractAddress = "0xF14871faE7C05Fb7a5175158809066c2Bc581C80";
+
 export const erc20ABI = [
   {
     inputs: [
