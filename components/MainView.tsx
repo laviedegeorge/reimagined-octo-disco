@@ -3,6 +3,7 @@ import { useAccount, useContractReads } from "wagmi";
 import { contractAddress, erc20ABI } from "../libs/contractABIs/erc20ABI";
 import ReadAllowance from "./contractComponents/contractForms/ReadAllowance";
 import Web3 from "web3";
+import ApproveTransactionForm from "./contractComponents/contractForms/ApproveForm";
 
 const tokenContract = {
   address: contractAddress,
@@ -75,7 +76,7 @@ export default function MainView() {
   return (
     <div>
       <div className="my-4">
-        <h2 className="text-2xl font-semibold underline mb-2">Read contract</h2>
+        <h2 className="text-2xl font-semibold underline mb-2">Read methods</h2>
         <p>Name of token: {`${tokenName && tokenName}`.toLocaleUpperCase()}</p>
         <p>
           Token symbol: {`${tokenSymbol && tokenSymbol}`.toLocaleUpperCase()}
@@ -95,7 +96,10 @@ export default function MainView() {
         <p>decimals: {`${decimals && decimals}`}</p>
         <ReadAllowance />
       </div>
-      {/* <BalanceOfBtn /> */}
+      <div>
+        <h2 className="text-2xl font-semibold underline mb-2">Read methods</h2>
+        <ApproveTransactionForm />
+      </div>
     </div>
   );
 }

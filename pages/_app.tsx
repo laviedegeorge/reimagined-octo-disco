@@ -7,6 +7,7 @@ import { bscTestnet } from "wagmi/chains";
 import { ThemeProvider } from "@wigxel/react-components";
 import { publicProvider } from "wagmi/providers/public";
 import { WagmiConfig, createConfig, configureChains } from "wagmi";
+import dynamic from "next/dynamic";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [bscTestnet],
@@ -19,15 +20,24 @@ const config = createConfig({
   webSocketPublicClient,
 });
 
+const ClientRoot = dynamic(
+  async () =>
+    function B({ Component, pageProps }: any) {
+      return (
+        <WagmiConfig config={config}>
+          <main className={`${bodyFont.variable} font-body`}>
+            <ThemeProvider theme={Theme}>
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </main>
+        </WagmiConfig>
+      );
+    },
+  { ssr: false }
+);
+
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
-  return (
-    <WagmiConfig config={config}>
-      <main className={`${bodyFont.variable} font-body`}>
-        <ThemeProvider theme={Theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </main>
-    </WagmiConfig>
-  );
+  // @ts-ignore
+  return <ClientRoot Component={Component} pageProps={pageProps} />;
 }
